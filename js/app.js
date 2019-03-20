@@ -49,19 +49,18 @@ Store.prototype.render = function(){
 
   let tr = document.createElement('tr');
   let td = document.createElement('td');
-  let table = document.getElementById('salesTable');
+  let tbody = document.getElementById('tbodySec');
   // console.log(table);
   this.calcCookiesPerHour();
-  table.appendChild(tr);
+  tbody.appendChild(tr);
   td.textContent = this.location;
   tr.appendChild(td);
   for (let i = 0; i < this.cookies_sold_per_hour.length; i++){
     let td = document.createElement('td');
-    console.log(this.cookies_sold_per_hour[i]);
+    // console.log(this.cookies_sold_per_hour[i]);
     td.textContent = this.cookies_sold_per_hour[i];
     tr.appendChild(td);
   }
-  
 
 };
 
@@ -76,20 +75,31 @@ function createTitle(){
   let table = document.createElement('table');
   let th = document.createElement('th');
   let td = document.createElement('td');
+  let tbody = document.createElement('tbody');
+  let thead = document.createElement('thead');
+  let tr = document.createElement('tr');
+  let ths = document.createElement('th');
+
   h1.textContent = 'Salmon Cookie Sales For All Locations';
   img.setAttribute('src', './.img/salmon.png');
   section.appendChild(h1);
   section.appendChild(img);
   section.appendChild(table);
   table.setAttribute('id', 'salesTable');
-  table.appendChild(th);
+  table.appendChild(thead);
+  thead.appendChild(tr);
+
+  ths.textContent = 'Sales Table';
+  tr.appendChild(ths);
   for (let i = 0; i < hours.length; i++){
-    let td = document.createElement('td');
-    td.textContent = hours[i];
-    th.appendChild(td);
+    let th = document.createElement('th');
+    th.textContent = hours[i];
+    tr.appendChild(th);
   }
-  td.textContent = 'Daily Totals';
-  th.appendChild(td);
+  th.textContent = 'Daily Totals';
+  tr.appendChild(th);
+  table.appendChild(tbody);
+  tbody.setAttribute('id', 'tbodySec');
 }
 
 createTitle();
@@ -109,27 +119,6 @@ seacenter.render();
 caphill.render();
 alki.render();
 
-
-
-{/* <table>
-<th>
-  <td>6:00am</td>
-  <td>7:00am</td>
-  <td>8:00am</td>
-  <td>9:00am</td>
-  <td>10:00am</td>
-  <td>Daily Totals</td>
-</th>
-<tr>
-  <td>First and Pike</td>
-  <td>123</td>
-  <td>333</td>
-  <td>232</td>
-  <td>34</td>
-  <td>154</td>
-</tr>
-
-</table> */}
 
 
 
