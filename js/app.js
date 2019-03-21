@@ -2,7 +2,6 @@
 
 let hours = ['6:00am', '7:00am', '8:00am', '9:00am','10:00am', '11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm','8:00pm'];
 
-
 let Store = function(location, min, max, avg){
   this.location = location;
   this.min_cust = min;
@@ -23,29 +22,8 @@ Store.prototype.calcCookiesPerHour = function(){
     this.cookies_sold_per_hour.push(Math.floor(this.customers_per_hour[i] * this.avg_cookie_sale));
   }
 };
-// Store.prototype.render = function(){
-//   let section = document.getElementById('salesSection');
-//   let h3 = document.createElement('h3');
-//   let ul = document.createElement('ul');
-//   this.calcCookiesPerHour();
-  
-//   h3.textContent = this.location;
-//   section.appendChild(h3);
-//   section.appendChild(ul);
-  
-//   for (let i = 0; i < hours.length; i++){
-//     let li = document.createElement('li');
-//     li.textContent = `${hours[i]}: ${this.cookies_sold_per_hour[i]} cookies`;
-//     ul.appendChild(li);
-//   }
-
-//   let li = document.createElement('li');
-//   li.textContent = `Total: ${this.cookies_sold_per_hour.reduce((sum, curr) => {return sum+curr;})} cookies`;
-//   ul.appendChild(li);
-// };
 
 Store.prototype.render = function(){
-  // let section = document.getElementById('salesSection');
 
   let tr = document.createElement('tr');
   let td = document.createElement('td');
@@ -61,7 +39,6 @@ Store.prototype.render = function(){
     td.textContent = this.cookies_sold_per_hour[i];
     tr.appendChild(td);
   }
-
 };
 
 function random(min, max){
@@ -70,6 +47,7 @@ function random(min, max){
 
 function createTitle(){
   let section = document.getElementById('salesSection');
+  let sectionAfterPic = document.getElementById('afterPic');
   let h1 = document.createElement('h1');
   let img = document.createElement('img');
   let table = document.createElement('table');
@@ -84,7 +62,8 @@ function createTitle(){
   img.setAttribute('src', './.img/salmon.png');
   section.appendChild(h1);
   section.appendChild(img);
-  section.appendChild(table);
+  //partition
+  sectionAfterPic.appendChild(table);
   table.setAttribute('id', 'salesTable');
   table.appendChild(thead);
   thead.appendChild(tr);
@@ -103,7 +82,7 @@ function createTitle(){
 }
 
 createTitle();
-
+// TODO: create an array of locations and generate these
 let oldmill = new Store('Old Mill', 12, 45, 4.5);
 let firstpike = new Store('First and Pike', 23, 65, 6.3);
 let seatac = new Store('Seatac Airport', 3, 24, 1.2);
@@ -111,7 +90,6 @@ let seacenter = new Store('Seattle Center', 11, 38, 3.7);
 let caphill = new Store('Capitol Hill', 20, 38, 2.3);
 let alki = new Store('alki', 2, 16, 4.6);
 
-// console.log(oldmill.render());
 oldmill.render();
 firstpike.render();
 seatac.render();
@@ -119,6 +97,15 @@ seacenter.render();
 caphill.render();
 alki.render();
 
+// Event Handlers
 
+let addStoreForm = document.getElementById('addStore');
+// console.log(addStoreForm);
 
+const handleClick = function(e){
+  //handle my click
+  e.preventDefault();
+  alert('submit handled');
+};
 
+addStoreForm.addEventListener('submit', handleClick);
