@@ -39,6 +39,9 @@ Store.prototype.render = function(){
     td.textContent = this.cookies_sold_per_hour[i];
     tr.appendChild(td);
   }
+  td = document.createElement('td');
+  td.textContent = this.cookies_sold_per_hour.reduce((sum, curr) => {return sum+curr;});
+  tr.appendChild(td);
 };
 
 function random(min, max){
@@ -81,27 +84,34 @@ function createTitle(){
   tbody.setAttribute('id', 'tbodySec');
 }
 
+function createTotalLine(){
+
+
+  //    let li = document.createElement('li');
+  // li.textContent = `Total: ${this.cookies_sold_per_hour.reduce((sum, curr) => {return sum+curr;})} cookies`;
+  
+}
+
 createTitle();
 // TODO: create an array of locations and generate these
-let oldmill = new Store('Old Mill', 12, 45, 4.5);
-let firstpike = new Store('First and Pike', 23, 65, 6.3);
-let seatac = new Store('Seatac Airport', 3, 24, 1.2);
-let seacenter = new Store('Seattle Center', 11, 38, 3.7);
-let caphill = new Store('Capitol Hill', 20, 38, 2.3);
-let alki = new Store('alki', 2, 16, 4.6);
 
-oldmill.render();
-firstpike.render();
-seatac.render();
-seacenter.render();
-caphill.render();
-alki.render();
+let arrStores = [];
+
+function createAllStores(location, min, max, avg){
+  const newstore = new Store(location, min, max, avg);
+  arrStores.push(newstore);
+}
+createAllStores('Old Mill', 12, 45, 4.5);
+createAllStores('First and Pike', 23, 65, 6.3);
+createAllStores('Seatac Airport', 3, 24, 1.2);
+createAllStores('Seattle Center', 11, 38, 3.7);
+createAllStores('Capitol Hill', 20, 38, 2.3);
+createAllStores('alki', 2, 16, 4.6);
+
+arrStores.map((item) => item.render());
 
 // Event Handlers
-
 let addStoreForm = document.getElementById('addStore');
-// console.log(addStoreForm);
-
 const handleClick = function(e){
   //handle my click
   e.preventDefault();
