@@ -1,0 +1,27 @@
+/* *{
+  outline: solid black 1px;
+} */
+
+#salesTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#salesTable td, #salesTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  
+}
+
+#salesTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#salesTable tr:hover {background-color: #ddd;}
+
+#salesTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
