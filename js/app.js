@@ -110,6 +110,7 @@ function createTotalLine(){
   let tfoot = document.createElement('tfoot');
   let tr = document.createElement('tr');
   let td = document.createElement('td');
+  tr.setAttribute('id','footerRow');
 
   for (let i = 0; i < hours.length; i++){
     colCookieNums[i] = [];
@@ -124,21 +125,51 @@ function createTotalLine(){
     });
   });
 
-  table.appendChild(tfoot);
-  tfoot.appendChild(tr);
-  td.textContent = 'Stores Total';
-  tr.appendChild(td);
-  colTotals.map(item => {
+if (!document.getElementById('storesTotal')){ 
+    table.appendChild(tfoot);
+    tfoot.appendChild(tr);
+    td.setAttribute('id', 'storesTotal');
+    td.textContent = 'Stores Total';
+    tr.appendChild(td);
+    colTotals.map(item => {
+      td = document.createElement('td');
+      td.setAttribute('id', '')
+      td.textContent = item;
+      return tr.appendChild(td);
+    });
+    console.log(pageTotal);
+    // debugger;
     td = document.createElement('td');
-    td.textContent = item;
-    return tr.appendChild(td);
-  });
-  console.log(pageTotal);
-  // debugger;
-  td = document.createElement('td');
-  td.textContent = pageTotal.reduce((sum,curr) => parseInt(sum)+parseInt(curr));
-  tr.appendChild(td);
+    td.textContent = pageTotal.reduce((sum,curr) => parseInt(sum)+parseInt(curr));
+    tr.appendChild(td);
+  } else {
+    (function(){
+      let elem = document.getElementById('footerRow');
+      elem.parentNode.removeChild(elem);
+      return false;
+    })();
+
+    table.appendChild(tfoot);
+    tfoot.appendChild(tr);
+    td.setAttribute('id', 'storesTotal');
+    td.textContent = 'Stores Total';
+    tr.appendChild(td);
+    colTotals.map(item => {
+      td = document.createElement('td');
+      td.setAttribute('id', '')
+      td.textContent = item;
+      return tr.appendChild(td);
+    });
+    // console.log(pageTotal);
+    // debugger;
+    td = document.createElement('td');
+    td.textContent = pageTotal.reduce((sum,curr) => parseInt(sum)+parseInt(curr));
+    tr.appendChild(td);
+
+  }
+
 }
+
 arrStores.map((item) => item.render());
 // console.log('debugger1');
 createTotalLine();
@@ -162,6 +193,7 @@ const handleClick = function(e){
   console.log(arrStores);
   arrStores[arrStores.length-1].render();
   target.reset();
+  createTotalLine();
 };
 
 addStoreForm.addEventListener('submit', handleClick);
