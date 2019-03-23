@@ -110,7 +110,6 @@ function createTotalLine(){
   let tfoot = document.createElement('tfoot');
   let tr = document.createElement('tr');
   let td = document.createElement('td');
-  
 
   for (let i = 0; i < hours.length; i++){
     colCookieNums[i] = [];
@@ -140,19 +139,29 @@ function createTotalLine(){
   td.textContent = pageTotal.reduce((sum,curr) => parseInt(sum)+parseInt(curr));
   tr.appendChild(td);
 }
-
 arrStores.map((item) => item.render());
-console.log('debugger1');
-
-// console.log('before hey');
+// console.log('debugger1');
 createTotalLine();
 
-// Event Handlers
+// ----------- Event Handlers ---------------//
+//                                           //
+//-------------------------------------------//
 let addStoreForm = document.getElementById('addStore');
 const handleClick = function(e){
-  //handle my click
   e.preventDefault();
-  alert('submit handled');
+  // alert('submit handled');
+  let target = e.target;
+  // on click of submit button, capture all data and assing to an array
+  let location = (target.location.value);
+  let min = parseInt(target.mincust.value);
+  let max = parseInt(target.maxcust.value);
+  let avg = parseInt(target.avg.value);
+  // call Store constructor, pass in parameters and create store object
+  createAllStores(location, min, max, avg);
+  // push store object into array of stores
+  console.log(arrStores);
+  arrStores[arrStores.length-1].render();
+  target.reset();
 };
 
 addStoreForm.addEventListener('submit', handleClick);
