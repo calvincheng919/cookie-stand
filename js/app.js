@@ -135,6 +135,7 @@ function createTotalLine(){
     return tr.appendChild(td);
   });
   console.log(pageTotal);
+  // debugger;
   td = document.createElement('td');
   td.textContent = pageTotal.reduce((sum,curr) => parseInt(sum)+parseInt(curr));
   tr.appendChild(td);
